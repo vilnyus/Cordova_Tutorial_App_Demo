@@ -86,23 +86,29 @@ public class CordovaDemoClass {
 
     @Test
     public void signToCordovaApp() {
-        String txtSettings;
+        String usernameXPath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View[3]/android.view.View[1]/android.view.View/android.widget.EditText";
+        String passwordXPath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View[3]/android.view.View[1]/android.view.View[3]/android.widget.EditText";
+        String nextButtonXpath = "//*[@text='Next']";
+        String signinButtonXpath = "//*[@text='Sign In With Password']";
+        String headerSettingsXpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View[2]/android.view.View[2]";
 
-        driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View[3]/android.view.View[1]/android.view.View/android.widget.EditText"))
-                .sendKeys("appium_user");
+        MobileElement usernameField = (MobileElement) driver.findElement(By.xpath(usernameXPath));
+        usernameField.sendKeys("appium_user");
 
-        driver.findElement(By.xpath("//*[@text='Next']")).click();
+        MobileElement nextButton = (MobileElement) driver.findElement(By.xpath(nextButtonXpath));
+        nextButton.click();
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View[3]/android.view.View[1]/android.view.View[3]/android.widget.EditText")
-                .sendKeys("noknok");
+        MobileElement passwordField = (MobileElement) driver.findElementByXPath(passwordXPath);
+        passwordField.sendKeys("noknok");
 
-        driver.findElement(By.xpath("//*[@text='Sign In With Password']")).click();
+        MobileElement signinButton = (MobileElement) driver.findElement(By.xpath(signinButtonXpath));
+        signinButton.click();
 
-        MobileElement HeadText = (MobileElement) driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View[2]/android.view.View[2]"));
+        MobileElement HeadText = (MobileElement) driver.findElement(By.xpath(headerSettingsXpath));
 
-        txtSettings = HeadText.getText();
+        String txtSettings = HeadText.getText();
 
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
